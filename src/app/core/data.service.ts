@@ -22,6 +22,7 @@ export class DataService {
     const rowHeaderCodes = tsvParse(
       results.dimensionResults[1].headerCodes
     ).columns;
+
     const rowDefs = tsvParse(
       results.dimensionResults[1].headerDescriptions
     ).columns;
@@ -29,20 +30,24 @@ export class DataService {
     const colHeaderCodes = tsvParse(
       results.dimensionResults[0].headerCodes
     ).columns;
-    colHeaderCodes.unshift('key');
+    // create a 
+    colHeaderCodes.unshift('id');
 
     let colDefs = tsvParse(
       results.dimensionResults[0].headerDescriptions
     ).columns;
-    colDefs.unshift('Year');
+    colDefs.unshift(' ');
 
     const cellData = results.measureResults[0].rows.map(
       (row) => tsvParse(row).columns
     );
 
+    // construct data in format for mat-table dataSource
     let dataSource = [];
     for (let i = 0; i < cellData.length; i++) {
-      let row =  cellData[i];
+      // get the row data and add the row name
+      const rowName = rowDefs[i];
+      let row = [rowName, ... cellData[i]];
       let rowData: any = {};
 
       for (let j = 0; j < row.length; j++) {
@@ -51,10 +56,6 @@ export class DataService {
         rowData[headerCode] = value;
       }
 
-      const rowName = rowDefs[i];
-      rowData['key'] = rowName;
-
-      console.log(rowData);
       dataSource.push(rowData);
     }
 
@@ -70,3 +71,4 @@ export class DataService {
     return tableData;
   }
 }
+
