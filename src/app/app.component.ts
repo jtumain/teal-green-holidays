@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
+import { TableData } from './core/data.model';
 import { DataService } from './core/data.service';
-import { dsvFormat, tsvFormatRow, tsvFormatRows, tsvParse, tsvParseRows } from 'd3-dsv';
-import { CubeResults, TableData } from './core/data.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'teal-green-holidays';
+  tableData: TableData = {
+    colDefs: [],
+    rowDefs: [],
+    cellData: [],
+    colHeaderCodes: [],
+    dataSource: []
+  };
 
-  constructor(
-    public dataService: DataService
-  ) {
-
-  }
+  constructor(public dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getCubeResults().subscribe((res: TableData) => {
-      console.log(res);
-    })
+    this.dataService.getCubeResults().subscribe((tableData: TableData) => {
+      this.tableData = tableData;
+    });
   }
 }

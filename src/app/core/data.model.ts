@@ -34,4 +34,6 @@ export interface TableData {
     colDefs: string[];
     rowDefs: string[];
     cellData: string[][];
+    colHeaderCodes: string[];
+    dataSource: [][];
 }

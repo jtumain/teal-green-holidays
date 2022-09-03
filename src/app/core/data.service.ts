@@ -19,22 +19,51 @@ export class DataService {
   }
 
   private _convertCubeResultsToTableData(results: CubeResults) {
-    const colDefs = tsvParse(
+    const rowHeaderCodes = tsvParse(
+      results.dimensionResults[1].headerCodes
+    ).columns;
+    const rowDefs = tsvParse(
       results.dimensionResults[1].headerDescriptions
     ).columns;
 
-    const rowDefs = tsvParse(
+    const colHeaderCodes = tsvParse(
+      results.dimensionResults[0].headerCodes
+    ).columns;
+    colHeaderCodes.unshift('key');
+
+    let colDefs = tsvParse(
       results.dimensionResults[0].headerDescriptions
     ).columns;
+    colDefs.unshift('Year');
 
     const cellData = results.measureResults[0].rows.map(
       (row) => tsvParse(row).columns
     );
 
+    let dataSource = [];
+    for (let i = 0; i < cellData.length; i++) {
+      let row =  cellData[i];
+      let rowData: any = {};
+
+      for (let j = 0; j < row.length; j++) {
+        const headerCode = colHeaderCodes[j];
+        const value =  row[j];
+        rowData[headerCode] = value;
+      }
+
+      const rowName = rowDefs[i];
+      rowData['key'] = rowName;
+
+      console.log(rowData);
+      dataSource.push(rowData);
+    }
+
     const tableData: TableData = {
       colDefs: colDefs,
       rowDefs: rowDefs,
       cellData: cellData,
+      colHeaderCodes: colHeaderCodes,
+      dataSource: dataSource
     };
     
     console.log(tableData);
