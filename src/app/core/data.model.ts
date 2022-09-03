@@ -22,10 +22,16 @@ export interface DimensionResults {
 export interface MeasureResults {
     id: string;
     rows:  string[];
-    cells: string[]
+    cells: string[];
 }
 
 export interface CubeResultsCount {
     tableName: string;
     countValue: number;
+}
+
+export interface TableData {
+    colDefs: string[];
+    rowDefs: string[];
+    cellData: string[][];
 }

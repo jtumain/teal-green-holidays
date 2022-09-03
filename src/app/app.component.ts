@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from './core/data.service';
-import { dsvFormat, tsvParse } from 'd3-dsv';
+import { dsvFormat, tsvFormatRow, tsvFormatRows, tsvParse, tsvParseRows } from 'd3-dsv';
+import { CubeResults, TableData } from './core/data.model';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.dataService.getCubeResults().subscribe((res: any) => {
-      console.log(res);;
-
-      const psv = tsvParse(res.dimensionResults[0].headerDescriptions);
-      console.log(psv);
+    this.dataService.getCubeResults().subscribe((res: TableData) => {
+      console.log(res);
     })
   }
 }
