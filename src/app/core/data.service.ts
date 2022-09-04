@@ -65,7 +65,7 @@ export class DataService {
       for (let j = 0; j < row.length; j++) {
         const headerCode = colHeaderCodes[j];
         const value = row[j];
-        rowData[headerCode] = value;
+        rowData[headerCode] = Number.parseInt(value) || value;
       }
 
       dataSource.push(rowData);

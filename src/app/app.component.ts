@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
 import { TableData } from './core/data.model';
 import { DataService } from './core/data.service';
 
@@ -19,11 +18,11 @@ export class AppComponent {
     cellData: [],
     colHeaderCodes: [],
     dataSource: [],
-    displayColumns: []
+    displayColumns: [],
   };
 
   displayedColumns: string[] = [];
-  dataSource = new MatTableDataSource();
+  dataSource: any[] = [];
 
   constructor(public dataService: DataService) {}
 
@@ -32,11 +31,31 @@ export class AppComponent {
       this.tableData = tableData;
       this.dataSource = tableData.dataSource as any;
       this.displayedColumns = tableData.displayColumns;
-
-      this.dataSource.sort = this.sort;
     });
   }
 
+  /**
+   * Sort column data.
+   * @param sort 
+   * @returns 
+   */
+  sortData(sort: Sort) {
+    const data = this.tableData.dataSource.slice();
+    if (!sort.active || sort.direction === '') {
+      this.dataSource = data;
+      return;
+    }
+
+    this.dataSource = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      const prop = sort.active;
+      return this.compare(a[prop], b[prop], isAsc) || 0;
+    });
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
 
   ngAfterViewInit() {}
 }
