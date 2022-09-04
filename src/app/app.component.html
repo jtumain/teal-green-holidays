@@ -56,20 +56,20 @@
 
   <mat-expansion-panel hideToggle class="mat-elevation-z8">
     <mat-expansion-panel-header>
-      <mat-panel-title> Filter data by: </mat-panel-title>
+      <mat-panel-title>Filter data by: </mat-panel-title>
     </mat-expansion-panel-header>
     <div [formGroup]="selectedColumnsFormGroup">
       <p
         formArrayName="selectedColumns"
         *ngFor="let column of selectedColumnsFormArray.controls; let i = index"
       >
-        <mat-checkbox [formControlName]="i">{{
+        <mat-checkbox *ngIf="i !== 0" [formControlName]="i">{{
           tableData.displayColumns[i]
         }}</mat-checkbox>
       </p>
     </div>
   </mat-expansion-panel>
-  
+
   <table
     mat-table
     [dataSource]="tableData.dataSource"

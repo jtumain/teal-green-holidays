@@ -45,7 +45,6 @@ export class AppComponent {
   private _addCheckboxes() {
     // remove first column from being filterable
     let columns: string[] = [...this.tableData.displayDefs];
-    //columns.shift();
     columns.forEach(() => this.selectedColumnsFormArray.push(new FormControl(true)));
   }
 
