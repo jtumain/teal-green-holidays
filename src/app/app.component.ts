@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { TableData } from './core/data.model';
 import { DataService } from './core/data.service';
 
@@ -13,18 +15,38 @@ export class AppComponent {
 
   title = 'teal-green-holidays';
   tableData: TableData = {
-    colHeaderCodes: [],
     dataSource: [],
     displayColumns: [],
     displayDefs: []
   };
 
-  constructor(public dataService: DataService) {}
+  selectedColumnsFormGroup!: FormGroup;
+
+  constructor(
+    public dataService: DataService,
+    private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
       this.tableData = tableData;
+
+      this.selectedColumnsFormGroup = this.formBuilder.group({
+        selectedColumns: new FormArray([])
+      });
+      this._addCheckboxes();
+      console.log(this.selectedColumnsFormArray)
     });
+  }
+
+  get selectedColumnsFormArray() {
+    return this.selectedColumnsFormGroup.controls['selectedColumns'] as FormArray;
+  }
+
+  private _addCheckboxes() {
+    // remove first column from being filterable
+    let columns: string[] = [...this.tableData.displayDefs];
+    //columns.shift();
+    columns.forEach(() => this.selectedColumnsFormArray.push(new FormControl(true)));
   }
 
   /**

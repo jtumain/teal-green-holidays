@@ -72,14 +72,13 @@ export class DataService {
     }
 
     let tableData: TableData = {
-      colHeaderCodes: colHeaderCodes,
       dataSource: dataSource,
       displayColumns: colHeaderCodes,
       displayDefs: colDefs
     };
 
     if (transpose) {
-      this.transpose(tableData, colDefs, rowDefs)
+      this.transpose(tableData, colHeaderCodes, colDefs, rowDefs)
     }
 
     console.log(tableData);
@@ -90,9 +89,9 @@ export class DataService {
    * Flip the table structure.
    * @param tableData 
    */
-  transpose(tableData: TableData, colDefs: string[], rowDefs: string[]) {
+  transpose(tableData: TableData, colHeaderCodes: string[], colDefs: string[], rowDefs: string[]) {
     let inputData = [...tableData.dataSource];
-    let inputColumns = tableData.colHeaderCodes;
+    let inputColumns = colHeaderCodes;
     let dataSource = [];
 
     // id is the key used for reference
