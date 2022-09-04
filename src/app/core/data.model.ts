@@ -35,5 +35,6 @@ export interface TableData {
     rowDefs: string[];
     cellData: string[][];
     colHeaderCodes: string[];
-    dataSource: [][];
+    dataSource: any[]; // holds the model for the material table
+    displayColumns: any[]; // holds the column structure for the material table
 }
