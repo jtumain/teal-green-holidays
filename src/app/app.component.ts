@@ -25,11 +25,6 @@ export class AppComponent {
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource();
 
-  inputData: any[] = [];
-  inputColumns: any[] = [];
-  displayColumns: string[] = [];
-  displayData: any[] = [];
-
   constructor(public dataService: DataService) {}
 
   ngOnInit() {
@@ -37,9 +32,6 @@ export class AppComponent {
       this.tableData = tableData;
       this.dataSource = tableData.dataSource as any;
       this.displayedColumns = tableData.displayColumns;
-
-      this.inputColumns = tableData.colHeaderCodes;
-      this.inputData = tableData.dataSource;
 
       this.dataSource.sort = this.sort;
     });
