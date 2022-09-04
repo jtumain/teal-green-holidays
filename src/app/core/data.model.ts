@@ -31,10 +31,8 @@ export interface CubeResultsCount {
 }
 
 export interface TableData {
-    colDefs: string[];
-    rowDefs: string[];
-    cellData: string[][];
     colHeaderCodes: string[];
     dataSource: any[]; // holds the model for the material table
     displayColumns: any[]; // holds the column structure for the material table
+    displayDefs: any[] // holds the id per column
 }

@@ -72,16 +72,14 @@ export class DataService {
     }
 
     let tableData: TableData = {
-      colDefs: colDefs,
-      rowDefs: rowDefs,
-      cellData: cellData,
       colHeaderCodes: colHeaderCodes,
       dataSource: dataSource,
-      displayColumns: colHeaderCodes
+      displayColumns: colHeaderCodes,
+      displayDefs: colDefs
     };
 
     if (transpose) {
-      this.transpose(tableData)
+      this.transpose(tableData, colDefs, rowDefs)
     }
 
     console.log(tableData);
@@ -92,7 +90,7 @@ export class DataService {
    * Flip the table structure.
    * @param tableData 
    */
-  transpose(tableData: TableData) {
+  transpose(tableData: TableData, colDefs: string[], rowDefs: string[]) {
     let inputData = [...tableData.dataSource];
     let inputColumns = tableData.colHeaderCodes;
     let dataSource = [];
@@ -104,7 +102,7 @@ export class DataService {
     dataSource = inputColumns.map((x) => this.formatInputRow(x, inputData));
 
     for (let i = 0; i < dataSource.length; i++) {
-      const colName = tableData.colDefs[i];
+      const colName = colDefs[i];
       dataSource[i][' '] = colName;
     }
     // add preceeding column
@@ -114,6 +112,8 @@ export class DataService {
     // update table data
     tableData.dataSource = dataSource;
     tableData.displayColumns = displayColumns;
+    // add an initial empty column 
+    tableData.displayDefs = [' ', ...rowDefs];
   }
 
   /**

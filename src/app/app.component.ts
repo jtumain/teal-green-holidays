@@ -13,24 +13,17 @@ export class AppComponent {
 
   title = 'teal-green-holidays';
   tableData: TableData = {
-    colDefs: [],
-    rowDefs: [],
-    cellData: [],
     colHeaderCodes: [],
     dataSource: [],
     displayColumns: [],
+    displayDefs: []
   };
-
-  displayedColumns: string[] = [];
-  dataSource: any[] = [];
 
   constructor(public dataService: DataService) {}
 
   ngOnInit() {
     this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
       this.tableData = tableData;
-      this.dataSource = tableData.dataSource as any;
-      this.displayedColumns = tableData.displayColumns;
     });
   }
 
@@ -42,11 +35,11 @@ export class AppComponent {
   sortData(sort: Sort) {
     const data = this.tableData.dataSource.slice();
     if (!sort.active || sort.direction === '') {
-      this.dataSource = data;
+      this.tableData.dataSource = data;
       return;
     }
 
-    this.dataSource = data.sort((a, b) => {
+    this.tableData.dataSource = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       const prop = sort.active;
       return this.compare(a[prop], b[prop], isAsc) || 0;
