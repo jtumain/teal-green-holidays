@@ -13,7 +13,6 @@ import { DataService } from './core/data.service';
 export class AppComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
-  title = 'teal-green-holidays';
   tableData: TableData = {
     dataSource: [],
     displayColumns: [],
@@ -34,7 +33,6 @@ export class AppComponent {
         selectedColumns: new FormArray([])
       });
       this._addCheckboxes();
-      console.log(this.selectedColumnsFormArray)
     });
   }
 
@@ -71,5 +69,4 @@ export class AppComponent {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  ngAfterViewInit() {}
 }
