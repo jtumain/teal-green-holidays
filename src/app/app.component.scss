@@ -4,8 +4,25 @@ table {
 
 .content {
     width: calc(100% - 100px);
-    margin: 0 auto;
-    padding-bottom: 64px;
+    margin: 2rem auto;
+    padding-bottom: 6rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mat-sort-header-container {
+    text-align: right;
+}
+
+.table-container {
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.filter-panel {
+    margin-bottom: 1rem;
 }
 
 .hidden {
