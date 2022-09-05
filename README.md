@@ -20,7 +20,10 @@ Angular Material was used, since it seems to have good table functionality.
 After seeing the cube-results.json and unsure on the best way to parse the data, I used d3-dsv to parse the content.
 In hindsight, this maybe excessive and I could've implemented my own function to parse the data.
 I created interfaces to match the response and then mapped the parsed values to this interface.
+Material Table required the data in a specific format which was quite troublesome.
+The header codes were used as IDs to reference the header descriptions.
 I then noticed that the data returned was in a different format displayed on a screenshot on the task.
+On my table the destinations were at the top and the years were on the left.
 From this I decided to implement a transpose function, that flips the years and destinations axis.
 
 Since I hadn't used Angular Material or its Material Table before, I encountered issues implementing filtering and sorting.
