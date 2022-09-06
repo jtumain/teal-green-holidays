@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './core/layout/header/header.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { LoginComponent } from './core/auth/login/login.component';
+import { BookingsComponent } from './bookings/bookings.component';
 
 const AngularMaterialModule = [
   MatTableModule,
@@ -40,6 +41,7 @@ const AngularMaterialModule = [
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    BookingsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,8 +12,10 @@ export class LoginComponent implements OnInit {
   hide: boolean = false;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService) {}
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {}
 
@@ -23,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   doTogglePassword(event: Event) {
     event.preventDefault();
-    this.hide = !this.hide
+    this.hide = !this.hide;
   }
 
   doLogin() {
@@ -32,9 +35,8 @@ export class LoginComponent implements OnInit {
     }
 
     const { username, password } = this.loginForm.value;
-    this.authService.login(username, password)
-      .subscribe(res => {
-        console.log(res);
-      });
+    this.authService.login(username, password).subscribe((res) => {
+      this.router.navigate(['/bookings']);
+    });
   }
 }
