@@ -1,0 +1,50 @@
+<mat-card class="login-wrapper">
+  <mat-card-content class="w-100">
+    <div class="header">
+      <h1>Login</h1>
+    </div>
+    <form (ngSubmit)="doLogin()" name="loginForm" [formGroup]="loginForm" class="w-100">
+      <div class="usernameInput">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            formControlName="username"
+            matInput
+            placeholder="Enter username"
+            required
+          />
+          <mat-error *ngIf="!loginForm.controls['username'].valid">
+            Username is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="doTogglePassword($event)"
+            [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>
+              {{ hide ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="!loginForm.controls['password'].valid">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>
