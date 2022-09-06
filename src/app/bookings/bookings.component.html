@@ -3,4 +3,6 @@
   This table shows a breakdown of the number of people that have been to each
   holiday destination per year.
 </p>
-<app-table></app-table>
+<ng-container *ngIf="tableData">
+    <app-table [tableData]="tableData"></app-table>
+</ng-container>

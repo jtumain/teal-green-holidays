@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { TableData } from '../../core/data.model';
@@ -12,11 +12,15 @@ import { DataService } from '../../core/data.service';
 export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
-  tableData: TableData = {
-    dataSource: [],
-    displayColumns: [],
-    displayDefs: [],
-  };
+  private _tableData!: TableData;
+  @Input()
+  set tableData(val) {
+    this._tableData = val;
+    this.onTableInit();
+  }
+  get tableData() {
+    return this._tableData;
+  }
 
   selectedColumnsFormGroup!: FormGroup;
 
@@ -25,15 +29,13 @@ export class TableComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit() {
-    this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
-      this.tableData = tableData;
+  ngOnInit() {}
 
-      this.selectedColumnsFormGroup = this.formBuilder.group({
-        selectedColumns: new FormArray([]),
-      });
-      this._addCheckboxes();
+  onTableInit() {
+    this.selectedColumnsFormGroup = this.formBuilder.group({
+      selectedColumns: new FormArray([]),
     });
+    this._addCheckboxes();
   }
 
   get selectedColumnsFormArray() {

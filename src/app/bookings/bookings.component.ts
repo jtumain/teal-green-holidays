@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatSort, Sort } from '@angular/material/sort';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/auth/auth.service';
 import { TableData } from '../core/data.model';
@@ -12,6 +11,8 @@ import { DataService } from '../core/data.service';
   styleUrls: ['./bookings.component.scss'],
 })
 export class BookingsComponent implements OnInit {
+  tableData!: TableData;
+
   constructor(
     private router: Router,
     private dataService: DataService,
@@ -19,5 +20,8 @@ export class BookingsComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
+      this.tableData = tableData;
+    });}
 }
