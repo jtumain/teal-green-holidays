@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     const { username, password } = this.loginForm.value;
     this.authService.login(username, password).subscribe((res) => {
-      this.router.navigate(['/bookings']);
+      this.router.navigate(['/bookings-api']);
     });
   }
 }

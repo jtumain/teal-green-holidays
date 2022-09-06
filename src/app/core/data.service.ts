@@ -2,38 +2,56 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tsvParse } from 'd3-dsv';
 import { map, Observable } from 'rxjs';
+import { ApiService } from './api/api.service';
 import { CubeResults, TableData } from './data.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, public api: ApiService) {}
 
   /**
    * Get cube results in a tabular format.
    * @param transpose true, if the table data should be flipped
-   * @returns 
+   * @returns
    */
   public getCubeResults(transpose: boolean = false): Observable<TableData> {
     return this.http.get('../assets/data/cube-results.json').pipe(
       map((response) => {
-        return this._convertCubeResultsToTableData(response as CubeResults, transpose);
+        return this._convertCubeResultsToTableData(
+          response as CubeResults,
+          transpose
+        );
+      })
+    );
+  }
+
+  public getApiCubeResults(
+    request: any,
+    transpose: boolean = false
+  ): Observable<TableData> {
+    const url = 'https://www.tealgreenholidays.co.uk/OrbitAPI/CloudDemo/Cubes/CloudDemo/CalculateSync';
+    return this.api.post(url, request).pipe(
+      map((response) => {
+        return this._convertCubeResultsToTableData(
+          response as CubeResults,
+          transpose
+        );
       })
     );
   }
 
   /**
-   * 
-   * @param results 
-   * @param transpose true, if the table data should be flipped 
-   * @returns 
+   *
+   * @param results
+   * @param transpose true, if the table data should be flipped
+   * @returns
    */
   private _convertCubeResultsToTableData(
     results: CubeResults,
     transpose: boolean = false
   ) {
-
     const rowDefs = tsvParse(
       results.dimensionResults[1].headerDescriptions
     ).columns;
@@ -74,11 +92,11 @@ export class DataService {
     let tableData: TableData = {
       dataSource: dataSource,
       displayColumns: colHeaderCodes,
-      displayDefs: colDefs
+      displayDefs: colDefs,
     };
 
     if (transpose) {
-      this.transpose(tableData, colHeaderCodes, colDefs, rowDefs)
+      this.transpose(tableData, colHeaderCodes, colDefs, rowDefs);
     }
 
     console.log(tableData);
@@ -87,9 +105,14 @@ export class DataService {
 
   /**
    * Flip the table structure.
-   * @param tableData 
+   * @param tableData
    */
-  transpose(tableData: TableData, colHeaderCodes: string[], colDefs: string[], rowDefs: string[]) {
+  transpose(
+    tableData: TableData,
+    colHeaderCodes: string[],
+    colDefs: string[],
+    rowDefs: string[]
+  ) {
     let inputData = [...tableData.dataSource];
     let inputColumns = colHeaderCodes;
     let dataSource = [];
@@ -111,15 +134,15 @@ export class DataService {
     // update table data
     tableData.dataSource = dataSource;
     tableData.displayColumns = displayColumns;
-    // add an initial empty column 
+    // add an initial empty column
     tableData.displayDefs = [' ', ...rowDefs];
   }
 
   /**
    * Map data from each row to the new structure.
-   * @param row 
-   * @param inputData 
-   * @returns 
+   * @param row
+   * @param inputData
+   * @returns
    */
   formatInputRow(row: any, inputData: any[]) {
     const output: any = {};

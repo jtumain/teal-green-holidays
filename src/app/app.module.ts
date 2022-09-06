@@ -14,9 +14,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { BookingsApiComponent } from './bookings-api/bookings-api.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
@@ -34,6 +36,7 @@ const AngularMaterialModule = [
   MatIconModule,
   MatInputModule,
   MatButtonModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
@@ -44,6 +47,7 @@ const AngularMaterialModule = [
     LoginComponent,
     BookingsComponent,
     TableComponent,
+    BookingsApiComponent,
   ],
   imports: [
     BrowserModule,

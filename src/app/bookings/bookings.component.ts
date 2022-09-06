@@ -12,6 +12,7 @@ import { DataService } from '../core/data.service';
 })
 export class BookingsComponent implements OnInit {
   tableData!: TableData;
+  loading = false;
 
   constructor(
     private router: Router,
@@ -21,7 +22,9 @@ export class BookingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
       this.tableData = tableData;
+      this.loading = false;
     });}
 }
