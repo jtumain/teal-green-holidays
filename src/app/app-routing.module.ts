@@ -5,6 +5,7 @@ import { BookingsComponent } from './bookings/bookings.component';
 import { LoginComponent } from './core/auth/login/login.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'bookings', component: BookingsComponent },
   { path: 'bookings-api', component: BookingsApiComponent }
