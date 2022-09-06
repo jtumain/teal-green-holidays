@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { BookingsApiComponent } from './bookings-api/bookings-api.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { LoginComponent } from './core/auth/login/login.component';
@@ -36,7 +37,8 @@ const AngularMaterialModule = [
   MatIconModule,
   MatInputModule,
   MatButtonModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
