@@ -12,15 +12,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HeaderComponent } from './core/layout/header/header.component';
-import { FooterComponent } from './core/layout/footer/footer.component';
-import { LoginComponent } from './core/auth/login/login.component';
 import { BookingsComponent } from './bookings/bookings.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { FooterComponent } from './core/layout/footer/footer.component';
+import { HeaderComponent } from './core/layout/header/header.component';
+import { TableComponent } from './shared/table/table.component';
 
 const AngularMaterialModule = [
   MatTableModule,
@@ -32,7 +33,7 @@ const AngularMaterialModule = [
   MatToolbarModule,
   MatIconModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
 ];
 
 @NgModule({
@@ -42,6 +43,7 @@ const AngularMaterialModule = [
     FooterComponent,
     LoginComponent,
     BookingsComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ const AngularMaterialModule = [
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ...AngularMaterialModule
+    ...AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
