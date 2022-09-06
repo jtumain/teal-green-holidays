@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from './core/auth/auth.service';
 import { TableData } from './core/data.model';
 import { DataService } from './core/data.service';
 
@@ -23,7 +24,8 @@ export class AppComponent {
 
   constructor(
     public dataService: DataService,
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder,
+    public authService: AuthService) {}
 
   ngOnInit() {
     this.dataService.getCubeResults(true).subscribe((tableData: TableData) => {
@@ -34,6 +36,11 @@ export class AppComponent {
       });
       this._addCheckboxes();
     });
+
+    this.authService.login('jalexander', 'JustinCloudDemo1!')
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
   get selectedColumnsFormArray() {
