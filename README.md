@@ -6,8 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This web application shows  a breakdown of the number of people that have been to each holiday destination per year in a table.
 
-To view the table without requiring login go to:
-https://teal-green-holidays.netlify.app/bookings
 
 
 ## Implementation Notes
