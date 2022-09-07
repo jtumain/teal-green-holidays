@@ -6,6 +6,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This web application shows  a breakdown of the number of people that have been to each holiday destination per year in a table.
 
+To view the table without requiring login go to:
+https://teal-green-holidays.netlify.app/bookings
+
+
 ## Implementation Notes
 
 This project uses:
@@ -32,6 +36,10 @@ Since the data received is dynamic from cube-results.json, I created my own filt
 
 After doing this I created a header and footer to add some personality.
 I then split the header and footer into components.
+
+After getting credentials for the API, I created an API service to handle requests requiring authentication.
+I then created an authentication service to manage token calls and to retrieve the user's access token.
+I wanted to have a separate page using the API and not using the API, so I created a table component that takes in table data.
 
 ## Installation
 
