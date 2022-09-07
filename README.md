@@ -47,6 +47,8 @@ After getting credentials for the API, I created an API service to handle reques
 I then created an authentication service to manage token calls and to retrieve the user's access token.
 I wanted to have a separate page using the API and not using the API, so I created a table component that takes in table data.
 
+With more time an auth guard would have been added, to prevent the bookings-api page from being accessed.
+
 ## Installation
 
 Clone this repo and run  `npm install`.
