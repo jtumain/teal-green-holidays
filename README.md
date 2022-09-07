@@ -6,7 +6,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This web application shows  a breakdown of the number of people that have been to each holiday destination per year in a table.
 
+The pages are:
+- Bookings: https://teal-green-holidays.netlify.app/#/bookings
+- Login: https://teal-green-holidays.netlify.app/#/login
+- Bookings API (accessed from using login page): https://teal-green-holidays.netlify.app/#/bookings-api
 
+To test the Login and Bookings API page "https://teal-green-holidays.netlify.app/" must be added to the Allowed CORS list.
+
+The table can be filtered by year.
+Each column in the table can change its sorting by clicking the column header.
 
 ## Implementation Notes
 
